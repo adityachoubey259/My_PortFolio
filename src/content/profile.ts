@@ -4,7 +4,7 @@ export const profile = {
   name: "Aditya Choubey",
   displayName: "ADITYA CHOUBEY",
   role: "AI Automation & Software Developer",
-  microcopy: "Software x AI x Industrial Technology",
+  microcopy: "AI Automation / Software Development / Industrial Technology",
   location: "Bhopal, Madhya Pradesh",
   hometown: "Durg, Chhattisgarh",
   email: "adityachoubey259@gmail.com",
@@ -13,7 +13,7 @@ export const profile = {
   githubLabel: "github.com/adityachoubey259",
   availability: "Open to software, AI automation and industrial technology collaborations",
   resume: {
-    available: false,
+    available: true,
     href: "/resume/Aditya-Choubey-Resume.pdf",
   },
 };
@@ -68,14 +68,14 @@ export const projects: Project[] = [
   },
   {
     number: "03",
-    title: "Hardware Monitoring + RS485",
+    title: "RS485 Industrial Monitoring",
     company: "Industrial Trade Link",
     summary: "Industrial monitoring concept combining hardware, embedded software and RS485 data exchange.",
     problem:
       "Industrial environments often need reliable communication between devices, processing logic and monitoring interfaces.",
     contribution:
       "Worked across the hardware/software interaction layer, communication architecture thinking and monitoring interface context.",
-    stack: ["Hardware integration", "Embedded software", "RS485", "Monitoring UI"],
+    stack: ["Hardware integration", "Embedded software", "RS485", "Monitoring interface"],
     features: [
       "Industrial device context",
       "RS485-linked data exchange",

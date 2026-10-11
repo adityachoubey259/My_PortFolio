@@ -1,4 +1,4 @@
-import { ArrowUpRight, BadgeCheck } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, ChevronRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { projects } from "@/content/profile";
@@ -8,13 +8,13 @@ export function Projects() {
   return (
     <section className="page-section work-section" id="work">
       <SectionHeader
-        eyebrow="Featured work"
-        title="Practical systems presented as premium case studies."
-        description="Every visual below is illustrative unless real screenshots are supplied; the written scope stays within verified facts."
+        eyebrow="Selected work"
+        title="Five practical systems, presented as an editorial engineering record."
+        description="Concept visuals are labeled clearly. No fabricated metrics, links, screenshots or production claims are included."
       />
-      <div className="project-stack">
+      <div className="project-stack" aria-label="Selected project case studies">
         {projects.map((project, index) => (
-          <Reveal className="project-case" key={project.title} delay={index * 0.04}>
+          <Reveal className={index === 0 ? "project-case project-case--feature" : "project-case"} key={project.title} delay={index * 0.04}>
             <div className="project-meta">
               <span>{project.number}</span>
               <p>{project.company}</p>
@@ -50,8 +50,7 @@ export function Projects() {
               <div className="case-footer">
                 <p>{project.note}</p>
                 <a href="#contact" aria-label={`Discuss ${project.title}`}>
-                  Discuss details
-                  <ArrowUpRight size={15} />
+                  Discuss details <ArrowUpRight size={15} />
                 </a>
               </div>
             </div>
@@ -64,6 +63,7 @@ export function Projects() {
           Aditya has also worked on several smaller software, automation and experimentation projects. This area is
           ready for verified names, links and screenshots as they become available.
         </p>
+        <ChevronRight size={18} aria-hidden="true" />
       </Reveal>
     </section>
   );

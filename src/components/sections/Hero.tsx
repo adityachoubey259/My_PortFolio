@@ -1,28 +1,24 @@
 "use client";
 
-import { ArrowDown, Download, Github, Mail, Sparkles } from "lucide-react";
+import { ArrowDown, Download, Github, Mail } from "lucide-react";
 import { useState } from "react";
 import { MagneticLink } from "@/components/ui/MagneticLink";
 import { profile } from "@/content/profile";
 import { cn } from "@/lib/utils";
 
-const nodes = [
-  { label: "Artificial Intelligence", x: 52, y: 15, description: "AI-assisted development, prompt systems and practical intelligence layers." },
-  { label: "Software Development", x: 18, y: 33, description: "Interfaces, backend logic and dependable web workflows." },
-  { label: "Workflow Automation", x: 74, y: 36, description: "n8n orchestration, data routing and trigger/action systems." },
-  { label: "Industrial Monitoring", x: 28, y: 68, description: "Inspection workflows, monitoring concepts and operational records." },
-  { label: "Hardware Integration", x: 62, y: 73, description: "Hardware/software interaction and RS485-linked communication thinking." },
-  { label: "Data & Analytics", x: 84, y: 63, description: "Dashboards, structured records and decision-friendly views." },
-];
-
-const lines = [
-  [0, 1],
-  [0, 2],
-  [1, 3],
-  [2, 4],
-  [3, 4],
-  [4, 5],
-  [2, 5],
+const facets = [
+  {
+    label: "Inspection logic",
+    body: "Issue capture, evidence trails and follow-up workflows for industrial contexts.",
+  },
+  {
+    label: "Automation paths",
+    body: "n8n-style trigger, routing and action sequences shaped into maintainable flows.",
+  },
+  {
+    label: "Signal exchange",
+    body: "Hardware/software thinking around RS485-linked monitoring and device information.",
+  },
 ];
 
 export function Hero() {
@@ -30,32 +26,22 @@ export function Hero() {
 
   return (
     <section className="hero-section" id="home">
-      <div className="ambient-grid" aria-hidden="true" />
+      <div className="hero-backplate" aria-hidden="true" />
       <div className="hero-copy">
-        <span className="hero-kicker">
-          <Sparkles size={15} />
-          {profile.microcopy}
-        </span>
-        <h1>
-          <span>{profile.displayName.split(" ")[0]}</span>
-          <span>{profile.displayName.split(" ")[1]}</span>
+        <span className="hero-kicker">{profile.microcopy}</span>
+        <h1 aria-label="Aditya Choubey">
+          <span>ADITYA</span>
+          <span>CHOUBEY.</span>
         </h1>
         <p className="hero-role">{profile.role}</p>
         <p className="hero-description">
-          Building intelligent software, practical automation
-          <br />
-          and connected systems that solve real-world problems.
+          Building intelligent software and connected systems for real-world problems.
         </p>
         <div className="hero-actions">
-          <MagneticLink href="#work">Explore My Work</MagneticLink>
-          <MagneticLink
-            href={profile.resume.available ? profile.resume.href : "#contact"}
-            variant="secondary"
-            disabled={!profile.resume.available}
-            aria-label={profile.resume.available ? "Download resume" : "Resume PDF not added yet"}
-          >
+          <MagneticLink href="#work">Explore Work</MagneticLink>
+          <MagneticLink href={profile.resume.href} variant="secondary" download="Aditya-Choubey-Resume.pdf">
             <Download size={16} />
-            {profile.resume.available ? "Download Resume" : "Resume PDF Pending"}
+            Download Resume
           </MagneticLink>
           <MagneticLink href={profile.github} variant="ghost" target="_blank" rel="noreferrer">
             <Github size={16} />
@@ -68,38 +54,41 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="constellation-card" aria-label="Interactive AI automation constellation">
-        <div className="constellation-frame">
-          <svg className="constellation-lines" viewBox="0 0 100 100" aria-hidden="true">
-            {lines.map(([from, to]) => (
-              <line key={`${from}-${to}`} x1={nodes[from].x} y1={nodes[from].y} x2={nodes[to].x} y2={nodes[to].y} />
-            ))}
-            <circle className="signal signal-a" r="1.1" />
-            <circle className="signal signal-b" r="0.8" />
-          </svg>
-          {nodes.map((node, index) => (
+      <div className="atelier-object" aria-label="Interactive abstract technical monogram">
+        <div className="object-grid" aria-hidden="true" />
+        <div className="monogram-sculpture" aria-hidden="true">
+          <span>A</span>
+          <span>C</span>
+          <i />
+        </div>
+        <div className="bus-lines" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className="facet-list">
+          {facets.map((facet, index) => (
             <button
-              key={node.label}
+              key={facet.label}
               type="button"
-              className={cn("constellation-node", active === index && "is-active")}
-              style={{ left: `${node.x}%`, top: `${node.y}%` }}
+              className={cn("facet-button", active === index && "is-active")}
+              onClick={() => setActive(index)}
               onFocus={() => setActive(index)}
               onMouseEnter={() => setActive(index)}
-              onClick={() => setActive(index)}
             >
-              <span />
-              <strong>{node.label}</strong>
+              <span>0{index + 1}</span>
+              {facet.label}
             </button>
           ))}
-          <div className="constellation-readout">
-            <span>Node 0{active + 1}</span>
-            <strong>{nodes[active].label}</strong>
-            <p>{nodes[active].description}</p>
-          </div>
+        </div>
+        <div className="facet-readout">
+          <span>Selected vector</span>
+          <strong>{facets[active].label}</strong>
+          <p>{facets[active].body}</p>
         </div>
       </div>
 
-      <a className="scroll-cue" href="#about" aria-label="Scroll to about section">
+      <a className="scroll-cue" href="#work" aria-label="Scroll to selected work">
         <ArrowDown size={16} />
       </a>
       <a className="hero-mail" href={`mailto:${profile.email}`}>

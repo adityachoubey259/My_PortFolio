@@ -15,8 +15,8 @@ export function About() {
   return (
     <section className="page-section about-section" id="about">
       <SectionHeader
-        eyebrow="About"
-        title="An engineering student building at the intersection of software, automation and industrial systems."
+        eyebrow="About / Engineering Philosophy"
+        title="A practical engineering path shaped by software, automation and hardware-aware thinking."
       />
       <div className="about-grid">
         <Reveal className="about-story">

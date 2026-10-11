@@ -7,7 +7,7 @@ export function Footer() {
       <div className="footer-mark">AC</div>
       <div>
         <p>Aditya Choubey</p>
-        <span>Software, AI automation and connected industrial systems.</span>
+        <span>AI automation, software development and connected industrial systems.</span>
       </div>
       <div className="footer-links" aria-label="Footer contact links">
         <a href={`mailto:${profile.email}`} aria-label="Email Aditya">

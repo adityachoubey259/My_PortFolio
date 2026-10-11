@@ -19,7 +19,7 @@ export function Contact() {
     <section className="contact-section" id="contact">
       <Reveal className="contact-panel">
         <span className="eyebrow">Contact</span>
-        <h2>Let&apos;s Build Something Meaningful.</h2>
+        <h2>Let&apos;s Build Something Worth Remembering.</h2>
         <p>
           Available from Bhopal for software development, AI automation, industrial workflow systems and practical
           hardware/software collaboration.
@@ -34,11 +34,11 @@ export function Contact() {
             {copied ? "Copied" : "Copy email"}
           </button>
           <MagneticLink
-            href={profile.resume.available ? profile.resume.href : "#contact"}
+            href={profile.resume.href}
             variant="secondary"
-            disabled={!profile.resume.available}
+            download="Aditya-Choubey-Resume.pdf"
           >
-            Resume PDF Pending
+            Download Resume
           </MagneticLink>
         </div>
         <div className="contact-grid">

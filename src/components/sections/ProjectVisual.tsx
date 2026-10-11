@@ -52,6 +52,7 @@ export function ProjectVisual({ project }: { project: Project }) {
 
   return (
     <div className="visual-shell inspection-visual" aria-label="Illustrative industrial inspection interface">
+      <span className="visual-caption">Concept visualization</span>
       <div className="camera-frame" />
       <div className="criticality-meter">
         <span />

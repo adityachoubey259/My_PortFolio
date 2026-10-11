@@ -17,7 +17,7 @@ export function Expertise() {
     <section className="page-section expertise-section" id="expertise">
       <SectionHeader
         eyebrow="Expertise"
-        title="A connected capability map, separated by demonstrated work and current learning."
+        title="A calm competency map, with current learning clearly separated from demonstrated work."
       />
       <div className="expertise-grid">
         <Reveal className="category-rail">

@@ -39,7 +39,7 @@ export function SystemArchitecture() {
   }
 
   return (
-    <section className="page-section architecture-section">
+    <section className="page-section architecture-section" id="systems">
       <SectionHeader
         eyebrow="Signature system"
         title="How I build systems: from real-world input to useful output."
