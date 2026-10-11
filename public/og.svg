@@ -1,0 +1,11 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#070A0F"/>
+  <path d="M80 470C240 330 309 496 456 351C585 224 656 267 780 154C883 60 1007 98 1124 42" stroke="#C9A968" stroke-width="2" stroke-opacity=".52"/>
+  <path d="M104 516H1096" stroke="#F4EFE4" stroke-opacity=".1"/>
+  <circle cx="784" cy="154" r="9" fill="#6BE6E8"/>
+  <circle cx="456" cy="351" r="9" fill="#C9A968"/>
+  <circle cx="240" cy="330" r="9" fill="#F4EFE4"/>
+  <text x="96" y="170" fill="#F4EFE4" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="700">ADITYA CHOUBEY</text>
+  <text x="100" y="238" fill="#C9A968" font-family="Arial, Helvetica, sans-serif" font-size="32">AI Automation &amp; Software Developer</text>
+  <text x="100" y="306" fill="#AEB7C4" font-family="Arial, Helvetica, sans-serif" font-size="26">Software x AI x Industrial Technology</text>
+</svg>
