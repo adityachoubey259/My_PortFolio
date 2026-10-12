@@ -1,4 +1,5 @@
 import { ArrowUpRight, BadgeCheck, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { projects } from "@/content/profile";
@@ -49,9 +50,16 @@ export function Projects() {
               </div>
               <div className="case-footer">
                 <p>{project.note}</p>
-                <a href="#contact" aria-label={`Discuss ${project.title}`}>
-                  Discuss details <ArrowUpRight size={15} />
-                </a>
+                <div className="case-links">
+                  <Link href={`/work/${project.slug}`} aria-label={`Open ${project.title} case study`}>
+                    Open case study <ArrowUpRight size={15} />
+                  </Link>
+                  {project.demoHref ? (
+                    <Link href={project.demoHref} aria-label={`Open ${project.title} demo`}>
+                      View demo <ArrowUpRight size={15} />
+                    </Link>
+                  ) : null}
+                </div>
               </div>
             </div>
           </Reveal>
@@ -63,7 +71,9 @@ export function Projects() {
           Aditya has also worked on several smaller software, automation and experimentation projects. This area is
           ready for verified names, links and screenshots as they become available.
         </p>
-        <ChevronRight size={18} aria-hidden="true" />
+        <Link href="/lab/analytics">
+          Visit analytics lab <ChevronRight size={18} aria-hidden="true" />
+        </Link>
       </Reveal>
     </section>
   );

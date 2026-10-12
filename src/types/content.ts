@@ -1,5 +1,6 @@
 export type Project = {
   number: string;
+  slug: string;
   title: string;
   company: string;
   summary: string;
@@ -9,6 +10,7 @@ export type Project = {
   features: string[];
   visual: "inspection" | "checklist" | "rs485" | "automation" | "python";
   note?: string;
+  demoHref?: string;
 };
 
 export type SkillCategory = {

@@ -1,18 +1,19 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { Download, Menu, X } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { profile } from "@/content/profile";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "#home", label: "Home" },
-  { href: "#work", label: "Work" },
-  { href: "#about", label: "About" },
-  { href: "#expertise", label: "Expertise" },
-  { href: "#systems", label: "Systems" },
-  { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#home", label: "Home", id: "home" },
+  { href: "/#work", label: "Work", id: "work" },
+  { href: "/lab/analytics", label: "Analytics", id: "analytics" },
+  { href: "/playground", label: "Playground", id: "playground" },
+  { href: "/recruiter", label: "Recruiter", id: "recruiter" },
+  { href: "/#contact", label: "Contact", id: "contact" },
 ];
 
 export function Navigation() {
@@ -28,8 +29,15 @@ export function Navigation() {
       setScrolled(scrollTop > 20);
       setProgress(height > 0 ? scrollTop / height : 0);
 
+      if (window.location.pathname !== "/") {
+        const route = links.find((link) => link.href === window.location.pathname);
+        if (route) setActive(route.id);
+        return;
+      }
+
       const current = links
-        .map((link) => link.href.slice(1))
+        .filter((link) => link.href.startsWith("/#"))
+        .map((link) => link.id)
         .findLast((id) => {
           const element = document.getElementById(id);
           return element ? element.offsetTop <= scrollTop + 180 : false;
@@ -46,19 +54,23 @@ export function Navigation() {
     <>
       <div className="scroll-progress" style={{ transform: `scaleX(${progress})` }} />
       <header className={cn("site-nav", scrolled && "site-nav--scrolled")}>
-        <a className="monogram" href="#home" aria-label="Aditya Choubey home">
+        <Link className="monogram" href="/#home" aria-label="Aditya Choubey home">
           AC
-        </a>
+        </Link>
         <nav className="desktop-nav" aria-label="Primary navigation">
           {links.map((link) => (
-            <a key={link.href} className={active === link.href.slice(1) ? "is-active" : ""} href={link.href}>
+            <Link key={link.href} className={active === link.id ? "is-active" : ""} href={link.href}>
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
-        <a className="nav-contact" href={`mailto:${profile.email}`}>
-          Contact
-        </a>
+        <div className="nav-actions">
+          <ThemeToggle />
+          <a className="nav-resume" href={profile.resume.href} download="Aditya-Choubey-Resume.pdf">
+            <Download size={15} />
+            Resume
+          </a>
+        </div>
         <button
           className="menu-button"
           type="button"
@@ -72,10 +84,13 @@ export function Navigation() {
 
       <div className={cn("mobile-panel", open && "mobile-panel--open")}>
         {links.map((link) => (
-          <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+          <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
             {link.label}
-          </a>
+          </Link>
         ))}
+        <a href={profile.resume.href} download="Aditya-Choubey-Resume.pdf" onClick={() => setOpen(false)}>
+          Download resume
+        </a>
       </div>
     </>
   );

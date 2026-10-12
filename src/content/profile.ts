@@ -28,6 +28,7 @@ export const education = {
 export const projects: Project[] = [
   {
     number: "01",
+    slug: "xecroai",
     title: "XecroAI",
     company: "CAITPL",
     summary: "Industrial inspection and issue-management application for structured site observations.",
@@ -49,6 +50,7 @@ export const projects: Project[] = [
   },
   {
     number: "02",
+    slug: "itl-checklist",
     title: "ITL Checklist",
     company: "Industrial Trade Link",
     summary: "Digital industrial checklist application for structured inspections and operational records.",
@@ -65,9 +67,11 @@ export const projects: Project[] = [
     ],
     visual: "checklist",
     note: "Mock dashboard is conceptual, not a real application screenshot.",
+    demoHref: "/playground",
   },
   {
     number: "03",
+    slug: "rs485-industrial-monitoring",
     title: "RS485 Industrial Monitoring",
     company: "Industrial Trade Link",
     summary: "Industrial monitoring concept combining hardware, embedded software and RS485 data exchange.",
@@ -84,9 +88,11 @@ export const projects: Project[] = [
     ],
     visual: "rs485",
     note: "Architecture diagram is conceptual because exact implementation details are not supplied.",
+    demoHref: "/playground",
   },
   {
     number: "04",
+    slug: "n8n-workflow-automation",
     title: "n8n Workflow Automation",
     company: "tirth.ai",
     summary: "Workflow orchestration and integration logic using n8n automation patterns.",
@@ -103,9 +109,11 @@ export const projects: Project[] = [
     ],
     visual: "automation",
     note: "Specific connected APIs are intentionally not listed until confirmed.",
+    demoHref: "/playground",
   },
   {
     number: "05",
+    slug: "python-website-system",
     title: "Python-Based Website System",
     company: "tirth.ai",
     summary: "Editable case study for Python-based website and backend development work.",

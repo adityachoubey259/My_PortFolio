@@ -1,12 +1,22 @@
 import type { MetadataRoute } from "next";
+import { projects } from "@/content/profile";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = "http://localhost:3000";
+  const staticRoutes = ["", "/recruiter", "/playground", "/lab/analytics"] as const;
+
   return [
-    {
-      url: "http://localhost:3000",
+    ...staticRoutes.map((route) => ({
+      url: `${baseUrl}${route}`,
       lastModified: new Date("2026-10-11"),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
+      changeFrequency: "monthly" as const,
+      priority: route === "" ? 1 : 0.8,
+    })),
+    ...projects.map((project) => ({
+      url: `${baseUrl}/work/${project.slug}`,
+      lastModified: new Date("2026-10-11"),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
   ];
 }

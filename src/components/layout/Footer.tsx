@@ -23,7 +23,7 @@ export function Footer() {
           <MapPin size={16} />
         </span>
       </div>
-      <small>© 2026 Aditya Choubey. Built as a living portfolio system.</small>
+      <small>(c) 2026 Aditya Choubey. Built as a living portfolio system.</small>
     </footer>
   );
 }

@@ -19,7 +19,7 @@ export function Contact() {
     <section className="contact-section" id="contact">
       <Reveal className="contact-panel">
         <span className="eyebrow">Contact</span>
-        <h2>Let&apos;s Build Something Worth Remembering.</h2>
+        <h2>LET&apos;S BUILD WHAT&apos;S NEXT.</h2>
         <p>
           Available from Bhopal for software development, AI automation, industrial workflow systems and practical
           hardware/software collaboration.
