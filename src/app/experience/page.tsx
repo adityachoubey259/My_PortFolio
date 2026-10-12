@@ -1,3 +1,5 @@
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { Shell } from "@/components/app/Shell";
 import { GlassPanel, PageHeader } from "@/components/app/Premium";
 import { education, experience } from "@/content/profile";
@@ -11,9 +13,9 @@ export default function ExperiencePage() {
   return (
     <Shell>
       <PageHeader
-        eyebrow="Profile / Experience"
-        title="Career timeline and education, presented without inflated claims."
-        description="Focused exposure across industrial software, automation, Python development and engineering education."
+        eyebrow="Experience"
+        title="Concise, verified experience and education."
+        description="A clear overview of practical exposure, project associations and engineering education."
       />
       <div className="experience-v4">
         {experience.map((item) => (
@@ -35,6 +37,13 @@ export default function ExperiencePage() {
         <p>{education.institute}</p>
         <p>{education.status}. {education.graduation}.</p>
       </GlassPanel>
+      <section className="minimal-cta">
+        <span>Need the short version?</span>
+        <h2>Open the quick overview for a recruiter-friendly summary.</h2>
+        <Link href="/recruiter">
+          Quick Overview <ArrowRight size={16} />
+        </Link>
+      </section>
     </Shell>
   );
 }

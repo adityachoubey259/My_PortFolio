@@ -4,7 +4,7 @@ import { Shell } from "@/components/app/Shell";
 import { GlossyCard, PageHeader } from "@/components/app/Premium";
 
 export const metadata = {
-  title: "Engineering Playground | ADITYA OS",
+  title: "Interactive Demos | ADITYA OS",
   description: "Launch interactive engineering demos for inspection, RS485 communication and workflow automation.",
 };
 
@@ -36,9 +36,9 @@ export default function PlaygroundPage() {
   return (
     <Shell>
       <PageHeader
-        eyebrow="Workspace / Playground"
-        title="Launch focused engineering applications."
-        description="Each demo has its own screen so the experience feels like software, not a crowded landing page."
+        eyebrow="Interactive Demos"
+        title="Optional hands-on demos for technical visitors."
+        description="Explore checklist, RS485 and automation simulations only when you want deeper interaction."
       />
       <div className="playground-launcher-grid">
         {apps.map((app) => {

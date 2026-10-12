@@ -11,9 +11,9 @@ export default function ProjectsPage() {
   return (
     <Shell>
       <PageHeader
-        eyebrow="Workspace / Projects"
-        title="Software product gallery for practical engineering work."
-        description="Search and filter verified project work. Illustrative visuals are labeled as conceptual and do not claim to be production screenshots."
+        eyebrow="Projects"
+        title="Practical software projects, explained clearly."
+        description="Start with what was built and why it matters. Open any case study for architecture, implementation notes and optional demos."
       />
       <ProjectGallery />
     </Shell>

@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Shell } from "@/components/app/Shell";
 import { GlossyCard, PageHeader } from "@/components/app/Premium";
@@ -11,38 +11,38 @@ export const metadata = {
 const capabilities = [
   {
     title: "Software Development",
-    status: "Demonstrated + learning",
-    skills: ["Python", "JavaScript", "HTML", "CSS", "PostgreSQL", "SQL / DBMS", "DSA", "C++ - currently learning"],
-    context: "Used across software projects, backend-oriented logic, UI implementation and structured data work.",
+    status: "Practical toolkit",
+    skills: ["Python", "JavaScript", "HTML", "CSS", "PostgreSQL", "APIs", "DSA"],
+    context: "Used for web applications, backend-oriented logic, interfaces and structured data work.",
     projects: ["Python Website System", "XecroAI", "ITL Checklist"],
   },
   {
-    title: "AI and Automation",
-    status: "Demonstrated",
-    skills: ["AI/ML fundamentals", "Prompt Engineering", "AI Productivity", "n8n", "Workflow Automation", "Data Analysis"],
+    title: "AI & Automation",
+    status: "Applied learning",
+    skills: ["AI/ML fundamentals", "Prompt Engineering", "n8n", "AI-assisted development", "Data Analysis"],
     context: "Applied to automation thinking, workflow routing, AI-assisted development and practical productivity systems.",
     projects: ["n8n Workflow Automation", "XecroAI"],
   },
   {
-    title: "Industrial Technology",
-    status: "Applied + advancing",
-    skills: ["RS485 integration", "Industrial monitoring concepts", "Hardware/software integration"],
+    title: "Industrial Systems",
+    status: "Project exposure",
+    skills: ["RS485", "Industrial monitoring", "Hardware-software integration"],
     context: "Connected-system thinking around device communication, monitoring surfaces and industrial workflows.",
     projects: ["RS485 Industrial Monitoring", "ITL Checklist"],
   },
   {
-    title: "Data and Analytics",
-    status: "Demonstrated through portfolio lab",
-    skills: ["Power BI thinking", "Dashboard design", "Synthetic data modeling", "CSV export", "Status filtering"],
-    context: "Presented through the Industrial Intelligence Studio demonstration with deterministic records.",
-    projects: ["Industrial Intelligence Studio"],
-  },
-  {
     title: "Currently Learning",
     status: "Learning",
-    skills: ["PLC", "HMI", "SCADA", "Drone electronics", "Drone assembly", "Drone programming", "C++"],
+    skills: ["C++", "PLC", "HMI", "SCADA", "Drone technology"],
     context: "Clearly marked as active learning and advancing practical knowledge, not represented as mastered.",
-    projects: ["Engineering Lab"],
+    projects: ["Learning Lab"],
+  },
+  {
+    title: "Additional Technical Exposure",
+    status: "Exposure",
+    skills: ["PCB design", "Cybersecurity fundamentals", "Deployment", "Domains", "DBMS"],
+    context: "Supporting areas that help connect software work with deployment, infrastructure and engineering fundamentals.",
+    projects: ["Data Analytics Demo", "Learning Lab"],
   },
 ];
 
@@ -50,11 +50,11 @@ export default function SkillsPage() {
   return (
     <Shell>
       <PageHeader
-        eyebrow="Profile / Skills"
-        title="Capability explorer without fake percentages."
-        description="Skills are grouped by practical context, project relevance and honest learning status."
+        eyebrow="Skills"
+        title="A clear technical toolkit without fake percentages."
+        description="Essential skills are visible immediately, with learning areas clearly labeled."
       />
-      <div className="capability-grid">
+      <div className="capability-grid capability-grid--simple">
         {capabilities.map((capability) => (
           <GlossyCard className="capability-card" key={capability.title}>
             <span>{capability.status}</span>
@@ -74,10 +74,10 @@ export default function SkillsPage() {
         ))}
       </div>
       <section className="minimal-cta">
-        <span>Want proof of interaction?</span>
-        <h2>Open the analytics and playground apps to see the skills in motion.</h2>
+        <span>Want to explore deeper?</span>
+        <h2>Open the interactive demos for checklist, RS485, automation and data dashboard examples.</h2>
         <Link href="/playground">
-          Launch playground <ArrowUpRight size={16} />
+          View Interactive Demos <ArrowRight size={16} />
         </Link>
       </section>
     </Shell>

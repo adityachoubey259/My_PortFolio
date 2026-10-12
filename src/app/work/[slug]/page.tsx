@@ -37,14 +37,23 @@ export default async function WorkDetailPage({ params }: PageProps) {
     <Shell>
       <main className="case-study-page">
         <section className="case-hero">
-          <Link href="/#work" className="back-link">
+          <Link href="/projects" className="back-link">
             <ArrowLeft size={16} />
-            Back to work
+            Back to projects
           </Link>
           <div>
             <span className="eyebrow">{project.company}</span>
             <h1>{project.title}</h1>
             <p>{detail.headline}</p>
+            <div className="case-hero-actions">
+              {project.demoHref ? (
+                <Link href={project.demoHref}>
+                  Try Interactive Demo <ArrowUpRight size={15} />
+                </Link>
+              ) : null}
+              <a href="#technical-details">Explore Technical Details</a>
+              <a href="#evidence-title">View System Architecture</a>
+            </div>
           </div>
           <ProjectVisual project={project} />
         </section>
@@ -64,10 +73,10 @@ export default async function WorkDetailPage({ params }: PageProps) {
           </article>
         </section>
 
-        <section className="architecture-narrative">
+        <section className="architecture-narrative" id="technical-details">
           <blockquote>{detail.quote}</blockquote>
           <div>
-            <span className="eyebrow">Architecture illustration</span>
+            <span className="eyebrow">View System Architecture</span>
             <div className="case-architecture-flow">
               {detail.architecture.map((item) => (
                 <span key={item}>{item}</span>
@@ -86,12 +95,14 @@ export default async function WorkDetailPage({ params }: PageProps) {
             </ul>
           </article>
           <article>
-            <h2>Technical considerations</h2>
-            <ul>
-              {detail.considerations.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            <details open>
+              <summary>Technologies and implementation details</summary>
+              <ul>
+                {detail.considerations.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </details>
           </article>
           <article>
             <h2>Challenges and learning</h2>
@@ -103,7 +114,7 @@ export default async function WorkDetailPage({ params }: PageProps) {
             </div>
           </article>
           <article>
-            <h2>Editable fields</h2>
+            <h2>Future evidence slots</h2>
             <p>These are intentionally left as future content slots until exact verified details are supplied.</p>
             <div className="tag-row">
               {detail.editableFields.map((item) => (
@@ -126,7 +137,7 @@ export default async function WorkDetailPage({ params }: PageProps) {
             ))}
             {project.demoHref ? (
               <Link href={project.demoHref}>
-                Open related playground
+                Try Interactive Demo
                 <ArrowUpRight size={15} />
               </Link>
             ) : null}

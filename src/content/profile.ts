@@ -86,7 +86,7 @@ export const projects: Project[] = [
     ],
     visual: "checklist",
     note: "Mock dashboard is conceptual, not a real application screenshot.",
-    demoHref: "/playground",
+    demoHref: "/playground/checklist",
     evidence: {
       publishingPermissionStatus: "Conceptual media only",
       media: [],
@@ -126,7 +126,7 @@ export const projects: Project[] = [
     ],
     visual: "rs485",
     note: "Architecture diagram is conceptual because exact implementation details are not supplied.",
-    demoHref: "/playground",
+    demoHref: "/playground/rs485",
     evidence: {
       publishingPermissionStatus: "Conceptual media only",
       media: [],
@@ -166,7 +166,7 @@ export const projects: Project[] = [
     ],
     visual: "automation",
     note: "Specific connected APIs are intentionally not listed until confirmed.",
-    demoHref: "/playground",
+    demoHref: "/playground/automation",
     evidence: {
       publishingPermissionStatus: "Permission needed before publishing",
       media: [],
@@ -229,28 +229,34 @@ export const projects: Project[] = [
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: "Software & Programming",
-    eyebrow: "Working toolkit",
+    title: "Software Development",
+    eyebrow: "Practical toolkit",
     status: "Mixed",
-    skills: ["Python", "JavaScript", "HTML", "CSS", "PostgreSQL", "SQL / DBMS", "Data Structures and Algorithms", "C++ - currently learning"],
+    skills: ["Python", "JavaScript", "HTML", "CSS", "PostgreSQL", "APIs", "Data Structures and Algorithms"],
   },
   {
     title: "AI & Automation",
-    eyebrow: "Systems thinking",
+    eyebrow: "Applied learning",
     status: "Demonstrated",
-    skills: ["AI/ML fundamentals", "Prompt Engineering", "AI-Assisted Development", "AI Productivity", "n8n", "Workflow Automation", "Data Analysis", "Power BI"],
+    skills: ["AI/ML fundamentals", "Prompt Engineering", "AI-Assisted Development", "n8n", "Workflow Automation", "Data Analysis"],
   },
   {
-    title: "Web & Development Tools",
-    eyebrow: "Delivery habits",
+    title: "Industrial Systems",
+    eyebrow: "Project exposure",
     status: "Demonstrated",
-    skills: ["APIs", "Git / GitHub", "VS Code", "Deployment fundamentals", "Domain configuration concepts"],
+    skills: ["RS485", "Industrial monitoring", "Hardware/software integration"],
   },
   {
-    title: "Hardware & Industrial Technology",
-    eyebrow: "Currently advancing",
+    title: "Currently Learning",
+    eyebrow: "Active learning",
     status: "Learning",
-    skills: ["PLC programming", "HMI development", "SCADA", "Industrial wiring", "Hardware/software integration", "Drone basics", "Drone assembly", "Component selection", "Drone programming"],
+    skills: ["C++", "PLC", "HMI", "SCADA", "Drone technology"],
+  },
+  {
+    title: "Additional Technical Exposure",
+    eyebrow: "Supporting fundamentals",
+    status: "Learning",
+    skills: ["PCB design", "Cybersecurity fundamentals", "Deployment", "Domains", "DBMS"],
   },
 ];
 

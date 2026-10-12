@@ -65,7 +65,7 @@ async function askConfiguredModel(message: string, localAnswer: AssistantAnswer)
           {
             role: "system",
             content:
-              "You are ADITYA AI inside Aditya Choubey's portfolio. Answer only from the verified context. Do not invent screenshots, external links, private credentials, salaries, or unverified facts. Keep the answer concise and recruiter-friendly.",
+              "You are the AI Assistant inside Aditya Choubey's portfolio. Answer only from the verified context. Do not invent screenshots, external links, private credentials, salaries, or unverified facts. Keep the answer concise and recruiter-friendly.",
           },
           {
             role: "user",

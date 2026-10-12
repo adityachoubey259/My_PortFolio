@@ -27,11 +27,9 @@ const projectRecords: KnowledgeRecord[] = projects.map((project) => ({
   id: `project-${project.slug}`,
   title: project.title,
   summary: [
-    `${project.title} is a ${project.company} project: ${project.summary}`,
-    `Problem: ${project.problem}`,
+    `${project.title} is a project from ${project.company}. ${project.summary}`,
     `Aditya's contribution: ${project.contribution}`,
-    `Key features: ${project.features.join(", ")}.`,
-    `Stack and themes: ${project.stack.join(", ")}.`,
+    `For technical depth, open the project case study.`,
     project.note ? `Evidence note: ${project.note}` : "",
   ]
     .filter(Boolean)

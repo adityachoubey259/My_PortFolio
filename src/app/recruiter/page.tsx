@@ -5,7 +5,7 @@ import { GlassPanel, PageHeader } from "@/components/app/Premium";
 import { education, experience, profile, projects } from "@/content/profile";
 
 export const metadata = {
-  title: "Recruiter View | ADITYA OS",
+  title: "Quick Overview | ADITYA OS",
   description: "Fast professional summary, skills, projects, experience and contact for Aditya Choubey.",
 };
 
@@ -13,7 +13,7 @@ export default function RecruiterPage() {
   return (
     <Shell>
       <PageHeader
-        eyebrow="Connect / Recruiter"
+        eyebrow="Quick Overview"
         title="A focused hiring summary with the signal brought forward."
         description="Readable, fast and intentionally conservative: no invented dates, metrics or seniority."
         actions={

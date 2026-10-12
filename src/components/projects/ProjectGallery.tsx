@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Search } from "lucide-react";
+import { ArrowUpRight, BarChart3, ClipboardCheck, RadioTower, Search, Workflow } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ProjectVisual } from "@/components/sections/ProjectVisual";
@@ -16,6 +16,13 @@ const projectCategories: Record<string, Array<(typeof categories)[number]>> = {
   "n8n-workflow-automation": ["Automation", "AI Software"],
   "python-website-system": ["Web Development", "Automation"],
 };
+
+const demos = [
+  { href: "/analytics", title: "Data Analytics Demo", icon: BarChart3, body: "Sample industrial dashboard with synthetic data, filters and CSV export." },
+  { href: "/playground/checklist", title: "Industrial Checklist Demo", icon: ClipboardCheck, body: "Interactive checklist flow for inspection-style records." },
+  { href: "/playground/rs485", title: "RS485 Simulator", icon: RadioTower, body: "Educational simulator for device polling and communication flow." },
+  { href: "/playground/automation", title: "Automation Workflow Demo", icon: Workflow, body: "n8n-style routing simulation for workflow automation." },
+];
 
 export function ProjectGallery() {
   const [query, setQuery] = useState("");
@@ -46,7 +53,7 @@ export function ProjectGallery() {
         </div>
       </div>
 
-      <div className="project-grid-v4">
+      <div className="project-grid-v4 project-grid-v6">
         {filtered.map((project, index) => (
           <Link className={cn("project-preview", index === 0 && "project-preview--featured")} href={`/work/${project.slug}`} key={project.slug}>
             <ProjectVisual project={project} />
@@ -68,6 +75,25 @@ export function ProjectGallery() {
       </div>
 
       {!filtered.length ? <p className="empty-state">No projects match this view.</p> : null}
+
+      <section className="demo-strip" aria-labelledby="interactive-demos-title">
+        <div>
+          <span className="os-eyebrow">Interactive Demos</span>
+          <h2 id="interactive-demos-title">Explore the deeper technical tools when you want hands-on context.</h2>
+        </div>
+        <div className="demo-strip-grid">
+          {demos.map((demo) => {
+            const Icon = demo.icon;
+            return (
+              <Link href={demo.href} key={demo.href}>
+                <Icon size={18} />
+                <strong>{demo.title}</strong>
+                <p>{demo.body}</p>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }

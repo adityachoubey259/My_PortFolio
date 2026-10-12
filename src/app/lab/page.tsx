@@ -2,7 +2,7 @@ import { Shell } from "@/components/app/Shell";
 import { GlossyCard, PageHeader } from "@/components/app/Premium";
 
 export const metadata = {
-  title: "Engineering Lab | ADITYA OS",
+  title: "Learning Lab | ADITYA OS",
   description: "Learning areas and experimental workspace for Aditya Choubey.",
 };
 
@@ -21,8 +21,8 @@ export default function LabPage() {
   return (
     <Shell>
       <PageHeader
-        eyebrow="Profile / Engineering Lab"
-        title="A journal for experiments, workshops and active learning."
+        eyebrow="Learning Lab"
+        title="Current learning areas and technical exposure."
         description="This page avoids invented certifications. It marks verified workshop exposure and ongoing learning areas as exactly that."
       />
       <div className="lab-v4-grid">

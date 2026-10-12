@@ -1,13 +1,13 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ChevronLeft, ChevronRight, Command, Download, Github, Menu, Search, X } from "lucide-react";
+import { Command, Download, Github, Menu, Search, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { AdityaAIAssistant } from "@/components/assistant/AdityaAIAssistant";
-import { appNavigation, commandItems } from "@/content/navigation";
+import { appNavigation, commandItems, primaryNavigation } from "@/content/navigation";
 import { profile } from "@/content/profile";
 import { cn } from "@/lib/utils";
 
@@ -16,15 +16,9 @@ function pathMatches(current: string, href: string) {
   return current === href || current.startsWith(`${href}/`);
 }
 
-function getStoredCollapsed() {
-  if (typeof window === "undefined") return false;
-  return localStorage.getItem("aditya-os-sidebar") === "collapsed";
-}
-
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
-  const [collapsed, setCollapsed] = useState(getStoredCollapsed);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
 
@@ -41,15 +35,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  function toggleCollapsed() {
-    setCollapsed((value) => {
-      const next = !value;
-      localStorage.setItem("aditya-os-sidebar", next ? "collapsed" : "expanded");
-      return next;
-    });
-  }
-
-  const nav = (
+  const mobileNav = (
     <nav className="os-nav" aria-label="Application navigation">
       {appNavigation.map((group) => (
         <div className="os-nav-group" key={group.label}>
@@ -57,24 +43,13 @@ export function AppShell({ children }: { children: ReactNode }) {
           {group.items.map((item) => {
             const Icon = item.icon;
             const active = pathMatches(pathname, item.href);
-            const content = (
-              <>
+
+            return (
+              <Link key={item.href} className={cn("os-nav-item", active && "is-active")} href={item.href} onClick={() => setDrawerOpen(false)}>
                 {active ? <motion.i layoutId="active-nav-pill" className="active-nav-pill" /> : null}
                 <Icon size={18} />
                 <strong>{item.label}</strong>
                 <em>{item.description}</em>
-              </>
-            );
-
-            return (
-              <Link
-                key={item.href}
-                className={cn("os-nav-item", active && "is-active")}
-                href={item.href}
-                onClick={() => setDrawerOpen(false)}
-                title={collapsed ? item.label : undefined}
-              >
-                {content}
               </Link>
             );
           })}
@@ -84,42 +59,29 @@ export function AppShell({ children }: { children: ReactNode }) {
   );
 
   return (
-    <div className={cn("os-shell", collapsed && "os-shell--collapsed")}>
-      <aside className="os-sidebar" aria-label="ADITYA OS sidebar">
-        <div className="os-brand">
-          <Link href="/" aria-label="ADITYA OS home">
-            <span>AC</span>
-            <strong>ADITYA OS</strong>
-            <em>Interactive Engineering Portfolio</em>
-          </Link>
-          <button type="button" onClick={toggleCollapsed} aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}>
-            {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
-          </button>
-        </div>
-        {nav}
-        <div className="os-sidebar-footer">
-          <a href={profile.resume.href} download="Aditya-Choubey-Resume.pdf" aria-label="Download resume">
-            <Download size={17} />
-            <span>Download resume</span>
-          </a>
-          <a href={profile.github} target="_blank" rel="noreferrer" aria-label="Open GitHub">
-            <Github size={17} />
-            <span>{profile.githubLabel}</span>
-          </a>
-          <button type="button" onClick={() => setPaletteOpen(true)}>
-            <Command size={17} />
-            <span>Command</span>
-            <kbd>Ctrl K</kbd>
-          </button>
-        </div>
-      </aside>
-
-      <header className="os-mobile-header">
-        <Link href="/" className="mobile-brand">
+    <div className="os-shell os-shell--effortless">
+      <header className="os-topbar">
+        <Link href="/" className="mobile-brand" aria-label="ADITYA OS home">
           <span>AC</span>
-          ADITYA OS
+          <strong>ADITYA OS</strong>
         </Link>
-        <div>
+        <nav className="os-primary-nav" aria-label="Primary navigation">
+          {primaryNavigation.map((item) => (
+            <Link className={cn(pathMatches(pathname, item.href) && "is-active")} href={item.href} key={item.href}>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="os-top-actions">
+          <button type="button" onClick={() => setPaletteOpen(true)} aria-label="Open command palette">
+            <Search size={17} />
+          </button>
+          <a href={profile.resume.href} download="Aditya-Choubey-Resume.pdf" aria-label="Download resume">
+            <Download size={16} />
+            Resume
+          </a>
+        </div>
+        <div className="os-mobile-actions">
           <button type="button" onClick={() => setPaletteOpen(true)} aria-label="Open command palette">
             <Search size={18} />
           </button>
@@ -144,7 +106,22 @@ export function AppShell({ children }: { children: ReactNode }) {
                   <X size={18} />
                 </button>
               </div>
-              {nav}
+              {mobileNav}
+              <div className="os-drawer-actions">
+                <a href={profile.resume.href} download="Aditya-Choubey-Resume.pdf">
+                  <Download size={17} />
+                  Download resume
+                </a>
+                <a href={profile.github} target="_blank" rel="noreferrer">
+                  <Github size={17} />
+                  GitHub
+                </a>
+                <button type="button" onClick={() => setPaletteOpen(true)}>
+                  <Command size={17} />
+                  Command
+                  <kbd>Ctrl K</kbd>
+                </button>
+              </div>
             </motion.div>
           </motion.div>
         ) : null}

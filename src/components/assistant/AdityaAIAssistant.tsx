@@ -10,7 +10,6 @@ import {
   Maximize2,
   MessageSquarePlus,
   Minus,
-  MoveHorizontal,
   RotateCcw,
   Send,
   Sparkles,
@@ -44,16 +43,16 @@ type PanelPosition = {
   y: number;
 };
 
-const PANEL_WIDTH = 430;
-const PANEL_HEIGHT = 630;
-const MAX_CHARS = 900;
+const COMPACT_PANEL_WIDTH = 370;
+const COMPACT_PANEL_HEIGHT = 480;
+const MAX_CHARS = 700;
 const STORAGE_KEY = "aditya-ai-panel-position";
 
 const suggestions = [
-  "Summarize Aditya for a recruiter",
-  "What did Aditya do at ITL?",
-  "Show the XecroAI project",
-  "Download the resume",
+  "What has Aditya built?",
+  "What are his main skills?",
+  "Tell me about XecroAI.",
+  "How can I contact him?",
 ];
 
 function makeId(prefix: string) {
@@ -64,8 +63,8 @@ function makeId(prefix: string) {
 function defaultPosition(): PanelPosition {
   if (typeof window === "undefined") return { x: 24, y: 24 };
   return {
-    x: Math.max(16, window.innerWidth - PANEL_WIDTH - 28),
-    y: Math.max(16, window.innerHeight - PANEL_HEIGHT - 28),
+    x: Math.max(16, window.innerWidth - COMPACT_PANEL_WIDTH - 24),
+    y: Math.max(16, window.innerHeight - COMPACT_PANEL_HEIGHT - 24),
   };
 }
 
@@ -89,8 +88,8 @@ function getInitialPosition(): PanelPosition {
 function clampPosition(position: PanelPosition): PanelPosition {
   if (typeof window === "undefined") return position;
   return {
-    x: Math.min(Math.max(12, position.x), Math.max(12, window.innerWidth - PANEL_WIDTH - 12)),
-    y: Math.min(Math.max(12, position.y), Math.max(12, window.innerHeight - PANEL_HEIGHT - 12)),
+    x: Math.min(Math.max(12, position.x), Math.max(12, window.innerWidth - COMPACT_PANEL_WIDTH - 12)),
+    y: Math.min(Math.max(12, position.y), Math.max(12, window.innerHeight - COMPACT_PANEL_HEIGHT - 12)),
   };
 }
 
@@ -99,7 +98,7 @@ function initialGreeting(): ChatMessage {
     id: makeId("assistant"),
     role: "assistant",
     content:
-      "Hi, I am ADITYA AI. I can answer from this portfolio's verified knowledge base, open project case studies, help recruiters find the resume, and explain the industrial analytics demos.",
+      "Hi! I'm the AI Assistant for Aditya's portfolio. I can help you explore his projects, skills and experience. What would you like to know?",
     mode: "Portfolio Knowledge Mode",
     sources: ["Portfolio assistant"],
   };
@@ -196,14 +195,6 @@ export function AdityaAIAssistant() {
     const clamped = clampPosition(next);
     setPosition(clamped);
     persistPosition(clamped);
-  }
-
-  function dockPanel(side: "left" | "right") {
-    if (typeof window === "undefined") return;
-    movePanel({
-      x: side === "left" ? 18 : window.innerWidth - PANEL_WIDTH - 18,
-      y: Math.max(18, Math.min(position.y, window.innerHeight - PANEL_HEIGHT - 18)),
-    });
   }
 
   function startDrag(event: ReactPointerEvent<HTMLDivElement>) {
@@ -303,13 +294,12 @@ export function AdityaAIAssistant() {
         type="button"
         className={cn("ai-launcher", open && !minimized && "is-hidden")}
         onClick={openAssistant}
-        aria-label="Open ADITYA AI portfolio assistant"
+        aria-label="Ask AI Assistant"
+        title="Ask AI Assistant"
       >
         <span>
           <Sparkles size={18} />
         </span>
-        <strong>ADITYA AI</strong>
-        <em>Portfolio Intelligence</em>
       </button>
 
       <AnimatePresence>
@@ -323,7 +313,7 @@ export function AdityaAIAssistant() {
             exit={reduceMotion ? undefined : { opacity: 0, y: 12 }}
           >
             <Maximize2 size={16} />
-            Restore ADITYA AI
+            Restore AI Assistant
           </motion.button>
         ) : null}
       </AnimatePresence>
@@ -334,7 +324,7 @@ export function AdityaAIAssistant() {
             className={cn("ai-panel", dragging && "is-dragging")}
             style={{ left: position.x, top: position.y }}
             role="dialog"
-            aria-label="ADITYA AI portfolio intelligence"
+            aria-label="AI Assistant"
             initial={reduceMotion ? false : { opacity: 0, y: 24, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={reduceMotion ? undefined : { opacity: 0, y: 18, scale: 0.96 }}
@@ -351,22 +341,22 @@ export function AdityaAIAssistant() {
                   <Bot size={18} />
                 </span>
                 <div>
-                  <strong>ADITYA AI</strong>
-                  <em>Portfolio Intelligence</em>
+                  <strong>AI Assistant</strong>
+                  <em>Ready to help</em>
                 </div>
               </div>
               <div className="ai-status">
                 <i />
-                Ready
+                Ready to help
               </div>
               <div className="ai-window-actions">
                 <button type="button" onClick={resetConversation} aria-label="Start new assistant chat" title="New chat">
                   <MessageSquarePlus size={16} />
                 </button>
-                <button type="button" onClick={() => setMinimized(true)} aria-label="Minimize ADITYA AI" title="Minimize">
+                <button type="button" onClick={() => setMinimized(true)} aria-label="Minimize AI Assistant" title="Minimize">
                   <Minus size={16} />
                 </button>
-                <button type="button" onClick={closeAssistant} aria-label="Close ADITYA AI" title="Close">
+                <button type="button" onClick={closeAssistant} aria-label="Close AI Assistant" title="Close">
                   <X size={16} />
                 </button>
               </div>
@@ -374,17 +364,9 @@ export function AdityaAIAssistant() {
             </div>
 
             <div className="ai-move-controls" aria-label="Assistant panel position controls">
-              <button type="button" onClick={() => dockPanel("left")}>
-                <MoveHorizontal size={14} />
-                Dock left
-              </button>
-              <button type="button" onClick={() => dockPanel("right")}>
-                <MoveHorizontal size={14} />
-                Dock right
-              </button>
               <button type="button" onClick={() => movePanel(defaultPosition())}>
                 <RotateCcw size={14} />
-                Reset
+                Reset position
               </button>
             </div>
 
@@ -407,7 +389,7 @@ export function AdityaAIAssistant() {
                     </div>
                   ) : null}
                   {message.role === "assistant" && message.mode ? (
-                    <small>{message.mode}</small>
+                    <small>Verified portfolio answer</small>
                   ) : null}
                 </article>
               ))}
