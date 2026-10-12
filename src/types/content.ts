@@ -11,6 +11,26 @@ export type Project = {
   visual: "inspection" | "checklist" | "rs485" | "automation" | "python";
   note?: string;
   demoHref?: string;
+  evidence?: ProjectEvidence;
+};
+
+export type ProjectMediaItem = {
+  title: string;
+  description: string;
+  src?: string;
+  alt?: string;
+  kind: "screenshot" | "architecture" | "document" | "concept";
+};
+
+export type ProjectEvidence = {
+  publishingPermissionStatus: "Public media available" | "Permission needed before publishing" | "Conceptual media only";
+  media: ProjectMediaItem[];
+  architecture: string[];
+  githubHref?: string;
+  liveHref?: string;
+  contributions: string[];
+  approach: string[];
+  evidenceNotes: string[];
 };
 
 export type SkillCategory = {

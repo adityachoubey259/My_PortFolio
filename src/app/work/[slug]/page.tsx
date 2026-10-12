@@ -2,6 +2,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Shell } from "@/components/app/Shell";
+import { ProjectEvidenceStudio } from "@/components/projects/ProjectEvidenceStudio";
 import { ProjectVisual } from "@/components/sections/ProjectVisual";
 import { getProjectBySlug, getProjectDetail } from "@/content/projectDetails";
 import { projects } from "@/content/profile";
@@ -111,6 +112,8 @@ export default async function WorkDetailPage({ params }: PageProps) {
             </div>
           </article>
         </section>
+
+        <ProjectEvidenceStudio project={project} />
 
         <section className="related-work">
           <span className="eyebrow">Related work</span>

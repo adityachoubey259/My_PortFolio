@@ -47,6 +47,25 @@ export const projects: Project[] = [
     ],
     visual: "inspection",
     note: "Illustrative interface treatment; replace with real screenshots when available.",
+    evidence: {
+      publishingPermissionStatus: "Permission needed before publishing",
+      media: [],
+      architecture: ["Inspection entry", "Evidence capture", "Criticality model", "Issue dashboard", "Follow-up queue"],
+      contributions: [
+        "Shaped inspection workflow thinking around structured observations.",
+        "Worked with evidence, location and criticality concepts for industrial usage.",
+        "Kept kiosk-style and dashboard review contexts in view.",
+      ],
+      approach: [
+        "Model the inspection as repeatable issue capture rather than a generic form.",
+        "Keep visual status and criticality easy to scan.",
+        "Separate verified claims from placeholder media until real assets are approved.",
+      ],
+      evidenceNotes: [
+        "No production screenshots are included in this portfolio build.",
+        "Any real media should be added only after permission and privacy review.",
+      ],
+    },
   },
   {
     number: "02",
@@ -68,6 +87,25 @@ export const projects: Project[] = [
     visual: "checklist",
     note: "Mock dashboard is conceptual, not a real application screenshot.",
     demoHref: "/playground",
+    evidence: {
+      publishingPermissionStatus: "Conceptual media only",
+      media: [],
+      architecture: ["Checklist template", "Inspection item", "Observation", "Status", "Report"],
+      contributions: [
+        "Helped shape structured checklist flows.",
+        "Focused on practical industrial PC recordkeeping context.",
+        "Built portfolio simulator patterns that demonstrate the workflow safely.",
+      ],
+      approach: [
+        "Prioritize repeatable pass, fail and attention decisions.",
+        "Make progress visible without implying fake production metrics.",
+        "Keep exported data readable and structured.",
+      ],
+      evidenceNotes: [
+        "The interactive playground is a conceptual portfolio demo.",
+        "Production screenshots are not included.",
+      ],
+    },
   },
   {
     number: "03",
@@ -89,6 +127,25 @@ export const projects: Project[] = [
     visual: "rs485",
     note: "Architecture diagram is conceptual because exact implementation details are not supplied.",
     demoHref: "/playground",
+    evidence: {
+      publishingPermissionStatus: "Conceptual media only",
+      media: [],
+      architecture: ["Device signal", "RS485 bus", "Protocol frame", "Processing layer", "Dashboard"],
+      contributions: [
+        "Worked across hardware/software interaction thinking.",
+        "Explored monitoring interface context for industrial data.",
+        "Presented RS485 accurately as a physical communication layer.",
+      ],
+      approach: [
+        "Keep device communication, protocol framing and UI states conceptually separate.",
+        "Avoid claiming direct live hardware connectivity in the browser demo.",
+        "Make signal health and fault states understandable to non-specialist viewers.",
+      ],
+      evidenceNotes: [
+        "Hardware photos and exact device models are not supplied.",
+        "Portfolio visuals are labeled as conceptual architecture.",
+      ],
+    },
   },
   {
     number: "04",
@@ -110,6 +167,25 @@ export const projects: Project[] = [
     visual: "automation",
     note: "Specific connected APIs are intentionally not listed until confirmed.",
     demoHref: "/playground",
+    evidence: {
+      publishingPermissionStatus: "Permission needed before publishing",
+      media: [],
+      architecture: ["Trigger", "Extract", "Classify", "Route", "Notify"],
+      contributions: [
+        "Built and refined automation logic patterns.",
+        "Worked with trigger/action sequencing and conditional routing concepts.",
+        "Kept connected service details private until confirmed.",
+      ],
+      approach: [
+        "Make route decisions inspectable.",
+        "Keep payload movement understandable.",
+        "Design for clear failure-aware handoffs.",
+      ],
+      evidenceNotes: [
+        "Connected applications and workflow JSON are not published in this version.",
+        "The playground demo is a safe simulation of the workflow logic.",
+      ],
+    },
   },
   {
     number: "05",
@@ -130,6 +206,24 @@ export const projects: Project[] = [
     ],
     visual: "python",
     note: "Add exact features later when the real system scope is confirmed.",
+    evidence: {
+      publishingPermissionStatus: "Permission needed before publishing",
+      media: [],
+      architecture: ["Request", "Python logic", "Data handling", "Website response", "Refinement"],
+      contributions: [
+        "Worked on Python programming and backend-oriented website functionality.",
+        "Handled practical processing logic within a conservative verified scope.",
+      ],
+      approach: [
+        "Avoid listing unconfirmed frameworks or infrastructure.",
+        "Leave clear slots for exact stack, database and deployment details.",
+        "Present learning value without overstating production maturity.",
+      ],
+      evidenceNotes: [
+        "Exact production scope still needs more verified detail.",
+        "No screenshots are included until real assets are supplied and approved.",
+      ],
+    },
   },
 ];
 

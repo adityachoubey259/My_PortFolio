@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
+import { AdityaAIAssistant } from "@/components/assistant/AdityaAIAssistant";
 import { appNavigation, commandItems } from "@/content/navigation";
 import { profile } from "@/content/profile";
 import { cn } from "@/lib/utils";
@@ -165,6 +166,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </motion.div>
         </AnimatePresence>
       </main>
+      <AdityaAIAssistant />
     </div>
   );
 }
