@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import type { ReactNode } from "react";
+import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,22 +21,39 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "ADITYA OS | Interactive Engineering Portfolio",
+  title: {
+    default: "Aditya Choubey | AI Automation & Software Developer",
+    template: "%s | Aditya Choubey",
+  },
   description:
-    "A premium purple-noir portfolio application for Aditya Choubey's software, automation, analytics and industrial engineering work.",
-  metadataBase: new URL("http://localhost:3000"),
+    "Portfolio for Aditya Choubey, an AI Automation & Software Developer focused on software, workflow automation, analytics and industrial technology.",
+  metadataBase: new URL(getSiteUrl()),
+  applicationName: "ADITYA OS",
+  authors: [{ name: "Aditya Choubey", url: "https://github.com/adityachoubey259" }],
+  creator: "Aditya Choubey",
+  publisher: "Aditya Choubey",
+  keywords: [
+    "Aditya Choubey",
+    "AI Automation Developer",
+    "Software Developer",
+    "Industrial Technology",
+    "n8n",
+    "RS485",
+    "Python",
+  ],
   openGraph: {
-    title: "ADITYA OS | Interactive Engineering Portfolio",
+    title: "Aditya Choubey | AI Automation & Software Developer",
     description:
-      "Software, AI automation, analytics and industrial engineering work by Aditya Choubey.",
+      "Explore Aditya Choubey's software, AI automation, analytics and industrial technology portfolio.",
     type: "website",
-    images: ["/og.svg"],
+    siteName: "ADITYA OS",
+    images: ["/opengraph-image"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ADITYA OS | Interactive Engineering Portfolio",
-    description: "Explore practical software, AI automation and connected industrial systems work.",
-    images: ["/og.svg"],
+    title: "Aditya Choubey | AI Automation & Software Developer",
+    description: "Explore practical software, AI automation and connected industrial systems work by Aditya Choubey.",
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { assistantContextDigest } from "@/lib/assistant/knowledge";
+import { approvedAssistantActions, assistantContextDigest } from "@/lib/assistant/knowledge";
 import { answerPortfolioQuestion } from "@/lib/assistant/retrieval";
-import type { AssistantAnswer } from "@/lib/assistant/types";
+import type { AssistantAction, AssistantAnswer } from "@/lib/assistant/types";
 
 type Bucket = {
   count: number;
@@ -12,6 +12,10 @@ const rateBuckets = new Map<string, Bucket>();
 const WINDOW_MS = 60_000;
 const MAX_REQUESTS = 18;
 const MAX_MESSAGE_LENGTH = 900;
+const MAX_BODY_BYTES = 4096;
+const MAX_RESPONSE_LENGTH = 1800;
+const MAX_CONCURRENT_MODEL_REQUESTS = 4;
+let activeModelRequests = 0;
 
 function getClientKey(request: NextRequest) {
   return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || request.headers.get("x-real-ip") || "local";
@@ -38,7 +42,25 @@ function readStringField(payload: unknown, key: string) {
 }
 
 function safeError(status: number, message: string) {
-  return NextResponse.json({ error: message }, { status });
+  return NextResponse.json({ error: message }, { status, headers: { "Cache-Control": "no-store" } });
+}
+
+function limitText(value: string, maxLength = MAX_RESPONSE_LENGTH) {
+  return value.length > maxLength ? `${value.slice(0, maxLength - 1).trim()}...` : value;
+}
+
+function safeActions(actions: AssistantAction[]) {
+  const approved = new Set(approvedAssistantActions.map((action) => `${action.kind}:${action.href}`));
+  return actions.filter((action) => approved.has(`${action.kind}:${action.href}`)).slice(0, 4);
+}
+
+function sanitizeAnswer(answer: AssistantAnswer): AssistantAnswer {
+  return {
+    ...answer,
+    answer: limitText(answer.answer),
+    actions: safeActions(answer.actions),
+    sources: answer.sources.slice(0, 6),
+  };
 }
 
 async function askConfiguredModel(message: string, localAnswer: AssistantAnswer) {
@@ -48,9 +70,11 @@ async function askConfiguredModel(message: string, localAnswer: AssistantAnswer)
   const timeoutMs = Number(process.env.ASSISTANT_TIMEOUT_MS || 8000);
 
   if (!apiKey) return null;
+  if (activeModelRequests >= MAX_CONCURRENT_MODEL_REQUESTS) return null;
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), Number.isFinite(timeoutMs) ? timeoutMs : 8000);
+  activeModelRequests += 1;
 
   try {
     const response = await fetch(providerUrl, {
@@ -82,10 +106,11 @@ async function askConfiguredModel(message: string, localAnswer: AssistantAnswer)
     const data = (await response.json()) as {
       choices?: Array<{ message?: { content?: string } }>;
     };
-    return data.choices?.[0]?.message?.content?.trim().slice(0, 1800) || null;
+    return limitText(data.choices?.[0]?.message?.content?.trim() || "") || null;
   } catch {
     return null;
   } finally {
+    activeModelRequests = Math.max(0, activeModelRequests - 1);
     clearTimeout(timeout);
   }
 }
@@ -95,9 +120,23 @@ export async function POST(request: NextRequest) {
     return safeError(429, "Too many assistant requests. Please wait a moment and try again.");
   }
 
+  const contentType = request.headers.get("content-type") || "";
+  if (!contentType.toLowerCase().includes("application/json")) {
+    return safeError(415, "Assistant requests must use application/json.");
+  }
+
+  const contentLength = Number(request.headers.get("content-length") || 0);
+  if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES) {
+    return safeError(413, "Assistant request body is too large.");
+  }
+
   let payload: unknown;
   try {
-    payload = await request.json();
+    const body = await request.text();
+    if (new TextEncoder().encode(body).length > MAX_BODY_BYTES) {
+      return safeError(413, "Assistant request body is too large.");
+    }
+    payload = JSON.parse(body);
   } catch {
     return safeError(400, "Invalid request body.");
   }
@@ -113,12 +152,12 @@ export async function POST(request: NextRequest) {
     return safeError(400, "Invalid assistant session.");
   }
 
-  const localAnswer = answerPortfolioQuestion(message);
+  const localAnswer = sanitizeAnswer(answerPortfolioQuestion(message));
   const modelAnswer = await askConfiguredModel(message, localAnswer);
 
   return NextResponse.json({
     ...localAnswer,
-    answer: modelAnswer ?? localAnswer.answer,
+    answer: limitText(modelAnswer ?? localAnswer.answer),
     mode: modelAnswer ? "AI-Powered Conversation" : localAnswer.mode,
-  });
+  }, { headers: { "Cache-Control": "no-store" } });
 }
