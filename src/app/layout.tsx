@@ -20,20 +20,20 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Aditya Choubey | AI Automation & Software Developer",
+  title: "ADITYA OS | Interactive Engineering Portfolio",
   description:
-    "Explore the software, AI automation, industrial monitoring and hardware-integrated projects of Aditya Choubey.",
+    "A premium purple-noir portfolio application for Aditya Choubey's software, automation, analytics and industrial engineering work.",
   metadataBase: new URL("http://localhost:3000"),
   openGraph: {
-    title: "Aditya Choubey | AI Automation & Software Developer",
+    title: "ADITYA OS | Interactive Engineering Portfolio",
     description:
-      "Software, AI automation, industrial monitoring and hardware-integrated projects by Aditya Choubey.",
+      "Software, AI automation, analytics and industrial engineering work by Aditya Choubey.",
     type: "website",
     images: ["/og.svg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aditya Choubey | AI Automation & Software Developer",
+    title: "ADITYA OS | Interactive Engineering Portfolio",
     description: "Explore practical software, AI automation and connected industrial systems work.",
     images: ["/og.svg"],
   },
@@ -47,8 +47,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F5F4F0" },
-    { media: "(prefers-color-scheme: dark)", color: "#101720" },
+    { media: "(prefers-color-scheme: light)", color: "#080710" },
+    { media: "(prefers-color-scheme: dark)", color: "#080710" },
   ],
 };
 
@@ -57,8 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     (function () {
       try {
         var stored = localStorage.getItem("theme");
-        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        var theme = stored || (prefersDark ? "dark" : "light");
+        var theme = stored || "dark";
         document.documentElement.dataset.theme = theme;
       } catch (error) {
         document.documentElement.dataset.theme = "light";

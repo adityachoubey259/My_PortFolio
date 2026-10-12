@@ -1,8 +1,7 @@
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Footer } from "@/components/layout/Footer";
-import { Navigation } from "@/components/layout/Navigation";
+import { Shell } from "@/components/app/Shell";
 import { ProjectVisual } from "@/components/sections/ProjectVisual";
 import { getProjectBySlug, getProjectDetail } from "@/content/projectDetails";
 import { projects } from "@/content/profile";
@@ -34,8 +33,7 @@ export default async function WorkDetailPage({ params }: PageProps) {
   const related = projects.filter((item) => item.slug !== project.slug).slice(0, 2);
 
   return (
-    <>
-      <Navigation />
+    <Shell>
       <main className="case-study-page">
         <section className="case-hero">
           <Link href="/#work" className="back-link">
@@ -132,7 +130,6 @@ export default async function WorkDetailPage({ params }: PageProps) {
           </div>
         </section>
       </main>
-      <Footer />
-    </>
+    </Shell>
   );
 }

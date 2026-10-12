@@ -1,28 +1,64 @@
-import { Footer } from "@/components/layout/Footer";
-import { Navigation } from "@/components/layout/Navigation";
-import { EngineeringPlayground } from "@/components/playground/EngineeringPlayground";
+import { ArrowRight, ClipboardCheck, RadioTower, Workflow } from "lucide-react";
+import Link from "next/link";
+import { Shell } from "@/components/app/Shell";
+import { GlossyCard, PageHeader } from "@/components/app/Premium";
 
 export const metadata = {
-  title: "Engineering Playground | Aditya Choubey",
-  description: "Interactive portfolio demonstrations for inspection workflows, RS485 concepts and automation routing.",
+  title: "Engineering Playground | ADITYA OS",
+  description: "Launch interactive engineering demos for inspection, RS485 communication and workflow automation.",
 };
+
+const apps = [
+  {
+    href: "/playground/checklist",
+    title: "Industrial Checklist",
+    icon: ClipboardCheck,
+    body: "Interactive inspection checklist with records, status controls and JSON export.",
+    status: "Functional demo",
+  },
+  {
+    href: "/playground/rs485",
+    title: "RS485 Communication Studio",
+    icon: RadioTower,
+    body: "Explore device communication, polling and technical signal flow.",
+    status: "Educational simulator",
+  },
+  {
+    href: "/playground/automation",
+    title: "Automation Flow Studio",
+    icon: Workflow,
+    body: "Simulate intelligent workflow routing and automation logic.",
+    status: "Browser simulation",
+  },
+];
 
 export default function PlaygroundPage() {
   return (
-    <>
-      <Navigation />
-      <main className="route-shell">
-        <section className="route-hero">
-          <span className="eyebrow">Engineering Playground</span>
-          <h1>Working demos for software, automation and industrial thinking.</h1>
-          <p>
-            These demonstrations are built to explain concepts honestly. They run in the browser and do not claim live
-            plant connectivity, production workflow execution or private integrations.
-          </p>
-        </section>
-        <EngineeringPlayground />
-      </main>
-      <Footer />
-    </>
+    <Shell>
+      <PageHeader
+        eyebrow="Workspace / Playground"
+        title="Launch focused engineering applications."
+        description="Each demo has its own screen so the experience feels like software, not a crowded landing page."
+      />
+      <div className="playground-launcher-grid">
+        {apps.map((app) => {
+          const Icon = app.icon;
+          return (
+            <GlossyCard className="playground-launcher-card" key={app.href}>
+              <div className="app-artwork">
+                <Icon size={38} />
+                <i />
+              </div>
+              <span>{app.status}</span>
+              <h2>{app.title}</h2>
+              <p>{app.body}</p>
+              <Link href={app.href}>
+                Launch <ArrowRight size={15} />
+              </Link>
+            </GlossyCard>
+          );
+        })}
+      </div>
+    </Shell>
   );
 }

@@ -3,7 +3,20 @@ import { projects } from "@/content/profile";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "http://localhost:3000";
-  const staticRoutes = ["", "/recruiter", "/playground", "/lab/analytics"] as const;
+  const staticRoutes = [
+    "",
+    "/projects",
+    "/analytics",
+    "/playground",
+    "/playground/checklist",
+    "/playground/rs485",
+    "/playground/automation",
+    "/skills",
+    "/lab",
+    "/experience",
+    "/recruiter",
+    "/contact",
+  ] as const;
 
   return [
     ...staticRoutes.map((route) => ({
